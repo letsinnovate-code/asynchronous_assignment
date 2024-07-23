@@ -14,16 +14,26 @@ function display(){
     
     
     const promise = new Promise((res, rej)=>{
-      fetch('https://jsonplaceholder.typicode.com/posts/1')
-      .then(response=>response.json())
-      .then(result=>document.querySelector(".content").textContent =`${result.title}`)
-      .catch(err=>document.querySelector(".content").textContent ="error while fetching the data")
-    })
-    
-    setTimeout(() => {
+      setTimeout(()=>{
+        fetch('https://jsonplaceholder.typicode.com/posts/1');
+        if(res){
+          resolve();
+        }
+        else {
+          reject();
+        }
+      },5000)
+      
       
      
-
-    }, 5000);
+      
+    })
+    promise
+    
+    .then(response=>response.json())
+    .then(result=>document.querySelector(".content").textContent =`${result.title}`)
+    .catch(err=>document.querySelector(".content").textContent ="error while fetching the data")
+    
+    
     
 }
