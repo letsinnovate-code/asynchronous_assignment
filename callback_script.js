@@ -18,7 +18,7 @@ function display(){
     setTimeout(() => {
       fetch('https://jsonplaceholder.typicode.com/posts/1')
       .then(response=>response.json())
-      .then(result=>document.querySelector(".content").textContent =`${result.title}`)
+      .then(result=>document.querySelector(".content").textContent =`${result.body}`)
       .catch(err=>document.querySelector(".content").textContent ="error while fetching the data")
 
     }, 5000);
