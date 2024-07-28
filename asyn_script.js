@@ -11,7 +11,7 @@ function display(){
     newDiv.classList.add("content")
     main.appendChild(newDiv);
     newDiv.innerHTML="Loading......";
-    
+    // created the async function fetchData  and return the data from the fetch url 
     async  function  fetchData (url) {
       try{
       const response = await  fetch(url);       
@@ -29,7 +29,7 @@ function display(){
         
         
       }
-
+// create the async function getData to display on screen 
       async function getData (){
         try{
             let  data = await  fetchData('https://jsonplaceholder.typicode.com/posts/');  

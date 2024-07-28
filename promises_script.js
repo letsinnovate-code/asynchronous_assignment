@@ -38,7 +38,7 @@ function display(){
       });
 
     }
-    
+    // calling the fetchData function and put the value into the screen using then and catch  
     fetchData('https://jsonplaceholder.typicode.com/posts/1')    
     .then(result=>document.querySelector(".content").textContent =`${result.body}`)
     .catch(err=>document.querySelector(".content").textContent ="error while fetching the data")
