@@ -12,24 +12,35 @@ function display(){
     main.appendChild(newDiv);
     newDiv.innerHTML="Loading......";
     
-    function fetchData(url){
+    function fetchData(url, timeout = 5000){
       return new Promise((response,reject)=>{
-        fetch(url)
-        .then(response=>{
+        // created a time out promise 
+        const timer = new Promise ((_,reject)=>{
+          setTimeout(()=>{
+            reject(new error("Timed out maximum time given to fetch the data is 5 seconds")),timeout
+          })
 
-          if(!response.ok){
-            throw new Error("network response was not ok.");
-          }
-          return response.json();
         })
+        // Race the fetch promise against the timeout promise 
+        Promise.race([
+          fetch(url)
+          .then(response=>{
+  
+            if(!response.ok){
+              throw new Error("network response was not ok.");
+            }
+            return response.json();
+          })
+        ])
+       
         .then(data=>response(data))
         .catch(error=>reject(error));
-      })
+      });
 
     }
     
     fetchData('https://jsonplaceholder.typicode.com/posts/1')    
-    .then(result=>document.querySelector(".content").textContent =`${result.title}`)
+    .then(result=>document.querySelector(".content").textContent =`${result.body}`)
     .catch(err=>document.querySelector(".content").textContent ="error while fetching the data")
     
     
